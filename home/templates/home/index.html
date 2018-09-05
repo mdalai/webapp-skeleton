@@ -1,0 +1,54 @@
+{% extends "home/base.html" %}
+
+{% block title %}
+  <title> {{ title }}</title>
+{% endblock %}
+
+{% block headstatic %} 
+
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js" type="text/javascript"></script>
+  <script src="{% static 'lib/jquery.gridly/javascripts/jquery.gridly.js' %}" type="text/javascript"></script>
+  <link href="{% static 'lib/jquery.gridly/stylesheets/jquery.gridly.css' %}" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="{% static 'home/css/style.css' %}">
+
+ 
+
+{% endblock %} 
+
+{% block content %}
+  <h1>My First Bootstrap Page. Logged in {{ loginuser }} </h1>  
+  
+  <div class="gridly">
+    <div class="brick small">hello
+      <a class="delete" href="#">x</a>
+    </div>
+    <div class="brick small">waht</div>
+    <div class="brick large"></div>
+    <div class="brick small">
+        <a href="#" class="btn btn-success btn-lg">
+            <span class="glyphicon glyphicon-print"></span> Print 
+          </a>
+    </div>
+    <div class="brick small">
+      <a href="#"> <span class="glyphicon glyphicon-envelope" style="font-size: 75px"></span>
+        this is greate
+      </a>
+    </div>
+    <div class="brick small"></div>
+    <div class="brick small"></div>
+    <div class="brick small"></div>
+    <div class="brick large"></div>
+  </div> 
+
+{% endblock %}  
+
+{% block footstatic %} 
+<script>
+    $('.gridly').gridly({
+      base: 60, // px 
+      gutter: 20, // px
+      columns: 12
+    });
+  </script> 
+{% endblock %} 

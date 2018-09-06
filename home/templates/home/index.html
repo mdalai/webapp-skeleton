@@ -6,49 +6,66 @@
 
 {% block headstatic %} 
 
-{% load static %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js" type="text/javascript"></script>
-  <script src="{% static 'lib/jquery.gridly/javascripts/jquery.gridly.js' %}" type="text/javascript"></script>
-  <link href="{% static 'lib/jquery.gridly/stylesheets/jquery.gridly.css' %}" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" type="text/css" href="{% static 'home/css/style.css' %}">
+{% load static %}  
+  <!-- 
+  <link rel="stylesheet" type="text/css" href="{% static 'home/css/style.css' %}">  -->
 
- 
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"> 
+  <style>
+    #sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+    #sortable li { margin: 6px 6px 6px 6px; padding: 1px; float: left; width: 220px; height: 210px; font-size: 4em; text-align: center; }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+    $( function() {
+      $( "#sortable" ).sortable();
+      //$( "#sortable" ).disableSelection();
+    } );
+  </script> 
 
 {% endblock %} 
 
 {% block content %}
-  <h1>My First Bootstrap Page. Logged in {{ loginuser }} </h1>  
+  <h1>My First Bootstrap Page. Logged in {{ loginuser }} </h1> 
   
-  <div class="gridly">
-    <div class="brick small">hello
-      <a class="delete" href="#">x</a>
-    </div>
-    <div class="brick small">waht</div>
-    <div class="brick large"></div>
-    <div class="brick small">
-        <a href="#" class="btn btn-success btn-lg">
-            <span class="glyphicon glyphicon-print"></span> Print 
-          </a>
-    </div>
-    <div class="brick small">
-      <a href="#"> <span class="glyphicon glyphicon-envelope" style="font-size: 75px"></span>
-        this is greate
+  <ul id="sortable">
+    <li class="ui-state-default" id="app1">
+      <div>1</div>
+      <a href="https://www.google.com" class="btn btn-success btn-lg" target="_blank">
+        <span class="glyphicon glyphicon-print"></span> Print 
       </a>
-    </div>
-    <div class="brick small"></div>
-    <div class="brick small"></div>
-    <div class="brick small"></div>
-    <div class="brick large"></div>
-  </div> 
+    </li>
+    <li class="ui-state-default" id="2">
+      <div>2</div>
+      <a href="#"> <span class="glyphicon glyphicon-envelope"></span>
+      </a>
+    </li>
+    <li class="ui-state-default" id="3">3</li>
+    <li class="ui-state-default" id="4">4</li>
+    <li class="ui-state-default" id="app-5">5</li>
+    <li class="ui-state-default" id="6">6</li>
+    <li class="ui-state-default" id="7">7</li>
+    <li class="ui-state-default" id="8">8</li>
+    <li class="ui-state-default" id="9">9</li>
+    <li class="ui-state-default" id="10">10</li>
+
+  </ul>
+
+  
 
 {% endblock %}  
 
 {% block footstatic %} 
 <script>
-    $('.gridly').gridly({
-      base: 60, // px 
-      gutter: 20, // px
-      columns: 12
+  $(document).ready(function(){
+    $('#sortable').sortable({
+        update: function(event, ui) {
+            var newOrder = $(this).sortable('toArray').toString();
+            alert(newOrder);
+            //$.get('saveSortable.php', {order:newOrder});
+        }
     });
-  </script> 
+  });
+</script> 
 {% endblock %} 

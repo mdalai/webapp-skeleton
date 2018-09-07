@@ -1,0 +1,19 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Please Login{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <div> <span class="glyphicon glyphicon-user" style="font-size: 34px;"> Login </span> </div>
+    <br>
+    <form class="form-signin" method="post">
+    {% csrf_token %}
+    {{ form.as_p}}
+
+    {{ form.username.label_tag }}
+    {{ form.username.id_for_label }}
+
+    <button class="btn btn-lg btn-primary" type="submit">Login</button>
+    </form>
+</div>
+{% endblock %}

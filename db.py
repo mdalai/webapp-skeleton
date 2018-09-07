@@ -86,10 +86,29 @@ def desc_db(db_path):
   for row in c.execute('SELECT * FROM users'):
         print(row)
 
-  conn.commit()
+  print('-'*10)
+
+  for row in c.execute('SELECT * FROM userapps'):
+        print(row)
+
   conn.close
+
+def gen_appuser_data(db_path):
+  conn = sqlite3.connect(db_path)
+  c = conn.cursor()
+
+  rows = c.execute('''select 1,pid from applications 
+                    WHERE defaultstatus=1
+                    ''').fetchall()
+  data = [ (None,i+1,)+row for i,row in enumerate(rows)]
+  print(data)
+  c.executemany('INSERT INTO userapps VALUES (?,?,?,?)', data)
+  
+  conn.commit()
+  conn.close()
 
 if __name__ == '__main__':
   db_path = 'db.sqlite3'
-  create_db(db_path)
+  #create_db(db_path)
+  gen_appuser_data(db_path)
   desc_db(db_path)

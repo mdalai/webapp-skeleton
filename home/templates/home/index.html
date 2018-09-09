@@ -7,65 +7,157 @@
 {% block headstatic %} 
 
 {% load static %}  
-  <!-- 
-  <link rel="stylesheet" type="text/css" href="{% static 'home/css/style.css' %}">  -->
-
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"> 
   <style>
     #sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-    #sortable li { margin: 6px 6px 6px 6px; padding: 1px; float: left; width: 220px; height: 210px; font-size: 4em; text-align: center; }
+    #sortable li { margin: 6px 6px 6px 6px; padding: 1px; float: left; width: 220px; height: 210px; font-size: 2em; text-align: center; }
   </style>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-    $( function() {
-      $( "#sortable" ).sortable();
-      //$( "#sortable" ).disableSelection();
-    } );
-  </script> 
+  
 
 {% endblock %} 
 
 {% block content %}
-  <h1>My First Bootstrap Page. Logged in {{ loginuser }} </h1> 
-  
+
+  {% if userapps_list %}
   <ul id="sortable">
-    <li class="ui-state-default" id="app1">
-      <div>1</div>
-      <a href="https://www.google.com" class="btn btn-success btn-lg" target="_blank">
-        <span class="glyphicon glyphicon-print"></span> Print 
-      </a>
+    {% for app in userapps_list %}
+    <li class="ui-state-default" id= {{ app.0 }}>
+    <div style="position:relative;"> 
+        <button class="del-btn"  value="{{app.0}}" 
+            style="background-color: Transparent; border: none; position:absolute; top:5px; right:5px; outline: none;">
+        <span class="glyphicon glyphicon-trash"
+            style="font-size: 12px; position:absolute; top:5px; right:5px;"></span> </button> 
+    </div>
+    <a href="{{app.5}}" target="_blank">
+        <div style="color:{{app.3}};" > {{ app.1 }} 
+           <p><span class="glyphicon glyphicon-home" style="font-size:40px;"></span> </p>             
+        </div>
+        <div style="font-size: 16px;"> {{ app.2 }} </div>
+    </a>
     </li>
-    <li class="ui-state-default" id="2">
-      <div>2</div>
-      <a href="#"> <span class="glyphicon glyphicon-envelope"></span>
-      </a>
-    </li>
-    <li class="ui-state-default" id="3">3</li>
-    <li class="ui-state-default" id="4">4</li>
-    <li class="ui-state-default" id="app-5">5</li>
-    <li class="ui-state-default" id="6">6</li>
-    <li class="ui-state-default" id="7">7</li>
-    <li class="ui-state-default" id="8">8</li>
-    <li class="ui-state-default" id="9">9</li>
-    <li class="ui-state-default" id="10">10</li>
+    {% endfor %}
+
+
+    <!-- <span class="glyphicon glyphicon-envelope"></span> 
+        <span class="glyphicon glyphicon-print"></span>
+    <li class="ui-state-default" id="6">
+        <span class="glyphicon glyphicon-hdd"></span></li>
+    <li class="ui-state-default" id="7">  
+        <span class="glyphicon glyphicon-folder-open"></span></li>
+    <li class="ui-state-default" id="8">
+        <span class="glyphicon glyphicon-globe"></span></li>
+    <li class="ui-state-default" id="9">
+        <span class="glyphicon glyphicon-home"></span></li>  -->
+    <li> <button class="glyphicon glyphicon-plus" id="add-app-button"
+        style="background-color:blue; border: none; color: white;  padding: 40px;
+            text-align: center; text-decoration: none; display: inline-block;
+            font-size: 36px; margin: 4px 2px;cursor: pointer; border-radius: 50%;"> 
+        </button></li>
 
   </ul>
+  {% else %}
+    <p>No apps avaible for you. Please add app!</p>
+  {% endif %}
 
-  
+  <div id="form-modal" class="modal fade">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">Add New Applicaton </h4>
+              </div>
+              <div id="form-modal-body" class="modal-body">
+                  <p>One fine body&hellip;</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+          </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+  </div><!-- /.modal --> 
 
 {% endblock %}  
 
 {% block footstatic %} 
-<script>
-  $(document).ready(function(){
-    $('#sortable').sortable({
-        update: function(event, ui) {
-            var newOrder = $(this).sortable('toArray').toString();
-            alert(newOrder);
-            //$.get('saveSortable.php', {order:newOrder});
-        }
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+    var formAjaxSubmit = function(form, modal) {
+        $(form).submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: $(this).attr('method'),
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                success: function (xhr, ajaxOptions, thrownError) {
+                    if ( $(xhr).find('.has-error').length > 0 ) {
+                        $(modal).find('.modal-body').html(xhr);
+                        formAjaxSubmit(form, modal);
+                    } else {
+                        $(modal).modal('toggle');
+                        location.reload();   //reload the page
+                    }
+                }, 
+                error: function (xhr, ajaxOptions, thrownError) {
+                }
+            });
+        });
+    }
+    $('#add-app-button').click(function() {
+        $('#form-modal-body').load('/home/add-app-form/', function () {
+            $('#form-modal').modal('toggle');
+            formAjaxSubmit('#form-modal-body form', '#form-modal');
+        });
     });
-  });
+
+
+    
+</script>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $( function() {
+      $( "#sortable" ).sortable();
+      //$( "#sortable" ).disableSelection();
+    } );
 </script> 
+
+<script>
+    $(document).ready(function(){
+        $('#sortable').sortable({
+            update: function(event, ui) {
+                var newOrder = $(this).sortable('toArray').toString();
+                //alert(newOrder);                
+                $.ajax({
+                    type: 'GET',
+                    contentType: 'application/json; charset=utf-8',
+                    url: "/home/sort/",
+                    data: {
+                        'order': newOrder
+                    },
+                    dataType: 'json',
+                });
+            }
+        });
+
+        $('.del-btn').click(function() {
+            var v_appid = $(this).attr("value");
+            //alert(v_appid);
+            $.ajax({
+                type: "post",
+                url: "/home/delete/" + v_appid +"/",
+                data: $(this).serialize(),
+                success: function (data) {
+                    if (data.success = true) {
+                        location.reload();
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                }
+            });
+        });
+        
+    });
+</script>
 {% endblock %} 

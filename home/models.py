@@ -6,20 +6,24 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from users.models import CustomUser
 
 
 class Applications(models.Model):
-    pid = models.IntegerField(primary_key=True)
-    name = models.TextField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    color = models.TextField(blank=True, null=True)
-    defaultstatus = models.IntegerField(blank=True, null=True)
-    link = models.TextField(blank=True, null=True)
-
+    # id = models.IntegerField(primary_key=True)    # will be auto generated
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=500, blank=True, null=True)
+    color = models.CharField(max_length=50, blank=True, null=True)
+    defaultstatus = models.BooleanField(default=False)
+    link = models.CharField(max_length=500, blank=True, null=True)
+    
     class Meta:
         managed = True
         db_table = 'applications'
-
+    
+    def __str__(self):
+        return self.name
+'''
 class Users(models.Model):
     pid = models.IntegerField(primary_key=True)
     login = models.TextField(blank=True, null=True)
@@ -28,13 +32,14 @@ class Users(models.Model):
     class Meta:
         managed = True
         db_table = 'users'
+'''
 
 
 class Userapps(models.Model):
-    pid = models.IntegerField(primary_key=True)
-    placeorder = models.IntegerField(blank=True, null=True)
-    userid = models.ForeignKey(Users, on_delete=models.CASCADE, db_column='userid')
-    appid = models.ForeignKey(Applications, on_delete=models.CASCADE, db_column='appid')
+    #pid = models.IntegerField(primary_key=True)    
+    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    app_id = models.ForeignKey(Applications, on_delete=models.CASCADE)
+    place_order = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = True

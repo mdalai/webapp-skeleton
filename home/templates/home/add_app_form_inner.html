@@ -1,0 +1,9 @@
+
+
+<div class="container">  <!-- class="jumbotron" -->
+    <form class="form-horizontal" action="{% url 'home:add-app-form' %}" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+        <input type="submit" class="btn btn-submit col-md-offset-2">
+    </form>
+</div>

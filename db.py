@@ -57,40 +57,17 @@ def desc_db(db_path):
 
   # databse descriptions
   tables = c.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()
-  print('-'*5 + ' TABLES '+ '-'*30)
-  for t in tables:
-    print(t)
-
-  print('-'*5 + ' TABLE INFO '+ '-'*30)
-  meta = c.execute("PRAGMA table_info('applications')")
-  for r in meta:
-    print(r)
-  print('-'*10)
-  meta = c.execute("PRAGMA table_info('users')")
-  for r in meta:
-    print(r)
-  print('-'*10)
-  meta = c.execute("PRAGMA table_info('userapps')")
-  for r in meta:
-    print(r)
+  print('-'*10 + ' TOTAL Tables: {}'.format(len(tables)))
+  for i,t in enumerate(tables):
+    print(str(i+1) + '-'*10 + ' DESC {}: '.format(t[0]))
+    meta = c.execute("PRAGMA table_info({})".format(t[0]))
+    for r in meta:
+      print(r)
+    print(str(i+1) + '-'*10 + ' QUERY {}: '.format(t[0]))
+    for row in c.execute('SELECT * FROM {}'.format(t[0])):
+        print(row)
   
   #print(c.fetchall())
-
-  print('-'*5 + ' TABLE DATA '+ '-'*30)
-
-  for row in c.execute('SELECT * FROM applications'):
-        print(row)
-
-  print('-'*10)
-
-  for row in c.execute('SELECT * FROM users'):
-        print(row)
-
-  print('-'*10)
-
-  for row in c.execute('SELECT * FROM userapps'):
-        print(row)
-
   conn.close
 
 def gen_appuser_data(db_path):
@@ -107,8 +84,24 @@ def gen_appuser_data(db_path):
   conn.commit()
   conn.close()
 
+def desc_table(db_path,tablename):
+  conn = sqlite3.connect(db_path)
+  c = conn.cursor()
+
+  print('-'*10 + ' DESC {}: '.format(tablename))
+  meta = c.execute("PRAGMA table_info({})".format(tablename))
+  for r in meta:
+    print(r)
+  print('-'*10 + ' QUERY {}: '.format(tablename))
+  for row in c.execute('SELECT * FROM {}'.format(tablename)):
+      print(row)
+  
+  conn.close()
+
 if __name__ == '__main__':
-  db_path = 'db.sqlite3'
+  db_path = 'mydb.sqlite3'
   #create_db(db_path)
-  gen_appuser_data(db_path)
-  desc_db(db_path)
+  #gen_appuser_data(db_path)
+  #desc_db(db_path)
+  desc_table(db_path,'userapps')
+  #desc_table(db_path,'users_customuser')

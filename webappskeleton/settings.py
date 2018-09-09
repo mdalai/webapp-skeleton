@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users',
-    #'users.apps.UsersConfig',  # users -- related like login 
+    #'users',
+    'users.apps.UsersConfig',  # users -- related like login 
 ]
 
 MIDDLEWARE = [
@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'webappskeleton.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'mydb.sqlite3'),
     }
 }
 
@@ -123,5 +123,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'home:index' #'/'
-LOGOUT_REDIRECT_URL = 'home:home' #'/'
+LOGOUT_REDIRECT_URL = 'home:index' #'/'
 AUTH_USER_MODEL = 'users.CustomUser'

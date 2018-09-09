@@ -3,10 +3,14 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-<h2>Sign up</h2>
+<div class="jumbotron">
+
+<h2><span class="glyphicon glyphicon-registration-mark" style="font-size: 34px;"></span>  Sign up</h2>
+<hr>
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit">Sign up</button>
+  <button type="submit" class="btn btn-lg btn-primary">Sign up</button>
 </form>
+</div>
 {% endblock %}

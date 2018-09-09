@@ -25,7 +25,7 @@ SECRET_KEY = '&ipblc!l%3z5w1syss%zzy1#5(jy=&3l%430rspixk!*01xb(%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

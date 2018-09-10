@@ -1,5 +1,5 @@
 # webapp-skeleton
-A web portal where users can manage application links.
+A web portal where users can self-manage application links.
 
 [home]: ./assets/home.PNG
 [db-design]: ./assets/db_design.PNG

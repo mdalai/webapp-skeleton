@@ -9,7 +9,7 @@ def create_db(db_path):
   cur.execute("DROP TABLE IF EXISTS userapps")
 
   cur.execute('''CREATE TABLE IF NOT EXISTS applications
-                  (pid INTEGER PRIMARY KEY,
+                  (id INTEGER PRIMARY KEY,
                    name TEXT,
                    description TEXT,
                    color TEXT,
@@ -17,17 +17,17 @@ def create_db(db_path):
                    link TEXT )  ''')
   
   cur.execute('''CREATE TABLE IF NOT EXISTS users
-                  (pid INTEGER PRIMARY KEY,
+                  (id INTEGER PRIMARY KEY,
                    login TEXT,
                    password TEXT )  ''')
 
   cur.execute('''CREATE TABLE IF NOT EXISTS userapps
-                  (pid INTEGER PRIMARY KEY,
+                  (id INTEGER PRIMARY KEY,
                    placeorder INTEGER,
-                   userid INTEGER,
-                   appid INTEGER,
-                   FOREIGN KEY (userid) REFERENCES users (pid),
-                   FOREIGN KEY (appid) REFERENCES applications (pid)
+                   user_id INTEGER,
+                   app_id INTEGER,
+                   FOREIGN KEY (user_id) REFERENCES users (id),
+                   FOREIGN KEY (app_id) REFERENCES applications (id)
                     )  ''')
 
   apps = [

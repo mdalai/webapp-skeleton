@@ -18,7 +18,12 @@ pip install -r requirements.txt
 python manage.py runserver
 ```
 ### Docker
-Set up `docker-machine` and `docker-compose` for running following command.
+```
+sudo docker build -t webapp .
+sudo docker run -d -p 8000:8000 webapp
+```
+
+If you already set up `docker-machine` and `docker-compose`, all you need is running following command.
 ```
 docker-compose up
 ```

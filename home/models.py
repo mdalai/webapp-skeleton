@@ -24,8 +24,6 @@ class Applications(models.Model):
     def __str__(self):
         return self.name
 
-    def count(self):
-        return 10
 '''
 class Users(models.Model):
     pid = models.IntegerField(primary_key=True)

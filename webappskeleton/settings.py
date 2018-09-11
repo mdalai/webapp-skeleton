@@ -32,7 +32,8 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'home.apps.HomeConfig',
-    'django.contrib.admin',
+    'webappskeleton.apps.MyAdminConfig',
+    #'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'webappskeleton.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')], # [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

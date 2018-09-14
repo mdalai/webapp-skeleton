@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #'users',
     'users.apps.UsersConfig',  # users -- related like login 
+    'rest_framework',
+    'restapi.apps.RestapiConfig',             # rest api
+    
 ]
 
 MIDDLEWARE = [
@@ -126,3 +129,11 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'home:index' #'/'
 LOGOUT_REDIRECT_URL = 'home:index' #'/'
 AUTH_USER_MODEL = 'users.CustomUser'
+
+
+
+REST_FRAMEWORK = {
+    # When you enable API versioning, the request.version attribute will contain a string
+    # that corresponds to the version requested in the incoming client request.
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
+}

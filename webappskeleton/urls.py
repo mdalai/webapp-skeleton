@@ -16,12 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', include('home.urls')),
     path('users/', include('users.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    #path('api/(?P<version>(v1|v2))/', include('restapi.urls')),
+    path('api/v1/', include('restapi.urls')),
 ]
 
 
@@ -30,3 +31,4 @@ from django.views.generic import RedirectView
 urlpatterns += [
     path('', RedirectView.as_view(url='/home/')),
 ]
+

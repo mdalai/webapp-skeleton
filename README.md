@@ -26,6 +26,7 @@ sudo docker run -d -p 8000:8000 webapp
 
 Using `docker-compose` command:
 ```
+docker-compose build
 docker-compose up
 ```
 
@@ -58,13 +59,9 @@ The web app achieved following functions and features:
 ## REST API
 Created a RESTfull API with Django REST framework. 
 
-Pull latest github repository and checkout the branch `rest`:
-``` 
-git checkout rest
+Pull latest github repository. Then install the app again by:
 ```
-
-Then install the app again by:
-```
+docker-compose build
 docker-compose up
 ```
 

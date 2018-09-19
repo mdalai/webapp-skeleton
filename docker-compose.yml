@@ -9,6 +9,12 @@ services:
       - "8000:8000"
     links:
       - redis:redis
+    depends_on:
+      - migration
+  migration:
+    command: python manage.py migrate --noinput
+    volumes:
+      - .:/code
   redis:
     restart: always
     image: redis:latest

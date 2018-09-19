@@ -102,6 +102,6 @@ if __name__ == '__main__':
   db_path = 'mydb.sqlite3'
   #create_db(db_path)
   #gen_appuser_data(db_path)
-  #desc_db(db_path)
-  desc_table(db_path,'userapps')
+  desc_db(db_path)
+  #desc_table(db_path,'userapps')
   #desc_table(db_path,'users_customuser')

@@ -53,3 +53,29 @@ The web app achieved following functions and features:
 - User can delete app by clicking the trash icon.
 - Default apps are displayed for the first time login. If a user remove all apps, these default apps show up again.
 - Administration is available at `http://ip:8000/admin`. You can manage apps and users in here. 
+
+
+## REST API
+Created a RESTfull API with Django REST framework. 
+
+Pull latest github repository and checkout the branch `rest`:
+``` 
+git checkout rest
+```
+
+Then install the app again by:
+```
+docker-compose up
+```
+
+Endpoints:
+- Apps 
+  - http://127.0.0.1:8000/api/v1/apps/
+  - http://127.0.0.1:8000/api/v1/apps/{app_id}/
+
+  If login as `admin`, you are able to POST, PUT and DELETE application. 
+
+- Users
+  - http://127.0.0.1:8000/api/v1/users/ 
+  - http://127.0.0.1:8000/api/v1/users//{user_id}/ 
+

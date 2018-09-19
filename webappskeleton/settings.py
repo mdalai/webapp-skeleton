@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #'users',
     'users.apps.UsersConfig',  # users -- related like login 
-    'rest_framework',
-    'restapi.apps.RestapiConfig',             # rest api
+    'rest_framework',                       # rest api
+    'restapi.apps.RestapiConfig',           # rest api
     
 ]
 

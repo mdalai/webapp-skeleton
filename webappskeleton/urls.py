@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,6 +24,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     #path('api/(?P<version>(v1|v2))/', include('restapi.urls')),
     path('api/v1/', include('restapi.urls')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 

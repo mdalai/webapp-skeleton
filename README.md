@@ -67,12 +67,12 @@ docker-compose up
 
 Endpoints:
 - Apps 
-  - http://127.0.0.1:8000/api/v1/apps/
-  - http://127.0.0.1:8000/api/v1/apps/{app_id}/
+  - http://127.0.0.1:8000/api/v1/apps
+  - http://127.0.0.1:8000/api/v1/apps/{app_id}
 
   If login as `admin`, you are able to POST, PUT and DELETE application. 
 
 - Users
-  - http://127.0.0.1:8000/api/v1/users/ 
-  - http://127.0.0.1:8000/api/v1/users//{user_id}/ 
+  - http://127.0.0.1:8000/api/v1/users 
+  - http://127.0.0.1:8000/api/v1/users/{user_id} 
 

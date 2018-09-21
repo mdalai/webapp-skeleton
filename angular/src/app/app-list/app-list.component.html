@@ -1,0 +1,24 @@
+<h1>
+  My Applications
+</h1>
+<div>
+  <table  style="width:100%">
+  <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Color</th>
+      <th>Default Status</th>
+      <th>Link</th>
+  </tr>
+  <tr *ngFor="let app of apps">
+      <td> {{ app.id }} </td>
+      <td> {{ app.name }} </td>
+      <td> {{ app.description }} </td>
+      <td> {{ app.color }} </td>
+      <td> {{ app.defaultstatus }} </td>
+      <td> {{ app.link }} </td>
+  </tr>
+  </table>
+  
+</div>

@@ -1,21 +1,19 @@
-FROM node:8-alpine as builder
-
-RUN npm set progress=false && npm config set depth 0 && npm cache clean --force
+FROM node:8-alpine
 
 # set working directory
-RUN mkdir /usr/src/app
-WORKDIR /usr/src/app
+#RUN mkdir app
+WORKDIR /app
 
-# add `/usr/src/app/node_modules/.bin` to $PATH
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 # install and cache app dependencies
-COPY package.json /usr/src/app/package.json
-RUN npm install
+COPY package.json package-lock.json /app/
 RUN npm install -g @angular/cli@6.2.3
+RUN cd /app && npm install
 
 # add app
-COPY . /usr/src/app
+COPY . /app
+
+#RUN cd /app && npm run build:$env
 
 # start app
 CMD ng serve --host 0.0.0.0

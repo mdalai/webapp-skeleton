@@ -8,6 +8,8 @@ import { ApiService } from  '../api.service';
 })
 export class AppListComponent implements OnInit {
 
+  displayedColumns: string[] = ['id', 'name', 'description', 'color', 'defaultstatus', 'link'];
+
   private apps: Array<object> = [];
 
   constructor(private apiService: ApiService) { }

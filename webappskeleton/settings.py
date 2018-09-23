@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CORS_ORIGIN_ALLOW_ALL=True                  # allow CROS
+
 
 # Application definition
 
@@ -43,10 +45,12 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',  # users -- related like login 
     'rest_framework',                       # rest api
     'restapi.apps.RestapiConfig',           # rest api
+    'corsheaders',                              # allow CROS
     
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',    # allow CROS
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

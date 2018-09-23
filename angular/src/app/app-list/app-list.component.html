@@ -1,8 +1,55 @@
 <h1>
-  My Applications
+  All Applications
 </h1>
+
+
+<table mat-table [dataSource]="apps" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- ID Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID. </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="color">
+    <th mat-header-cell *matHeaderCellDef> Color </th>
+    <td mat-cell *matCellDef="let element"> {{element.color}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="defaultstatus">
+    <th mat-header-cell *matHeaderCellDef> Default Status </th>
+    <td mat-cell *matCellDef="let element"> {{element.defaultstatus}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="link">
+    <th mat-header-cell *matHeaderCellDef> Link </th>
+    <td mat-cell *matCellDef="let element"> 
+      <a href="{{element.link}}" target="_blank"> {{element.link}} </a> </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<!--
 <div>
-  <table  style="width:100%">
+  <table>
   <tr>
       <th>ID</th>
       <th>Name</th>
@@ -22,3 +69,4 @@
   </table>
   
 </div>
+-->

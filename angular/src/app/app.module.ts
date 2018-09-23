@@ -7,6 +7,9 @@ import { AppCreateComponent } from './app-create/app-create.component';
 
 import {AppRoutingModule} from  './app-routing.module';
 import { HttpClientModule } from  '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,9 @@ import { HttpClientModule } from  '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

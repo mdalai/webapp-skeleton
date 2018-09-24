@@ -76,3 +76,19 @@ Endpoints:
   - http://127.0.0.1:8000/api/v1/users 
   - http://127.0.0.1:8000/api/v1/users/{user_id} 
 
+## Angular 6 frontend
+Created a frontend with Angular 6 which consumes REST API data on `http://127.0.0.1:8000/api/v1/apps/`. The page adapted Angular material design. 
+
+Pull the branch - `angular` from repo with following git command:
+```
+git pull
+git branch angular
+git fetch origin angular:angular
+git checkout angular
+```
+Install the code again with following docker command:
+```
+docker-compose build
+docker-compose up
+```
+Now, `http://127.0.0.1:4200` should display all apps from the REST API endpoint: http://127.0.0.1:8000/api/v1/apps.json. 

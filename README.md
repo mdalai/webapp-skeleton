@@ -9,7 +9,7 @@ A web portal where users can self-manage application links.
 ## Install and Run
 
 ### python pip
-Python3 is preferred. Feel free to set up an virtualenv for following installation commands.
+Python 3.10+ is required. Feel free to set up a virtualenv for following installation commands.
 ```
 # install dependencies, pip3 for Linux 
 pip install -r requirements.txt

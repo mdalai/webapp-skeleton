@@ -23,7 +23,7 @@ class AjaxTemplateMixin(object):
           split[-1] = '_inner'
           split.append('.html')
           self.ajax_template_name = ''.join(split)
-      if request.is_ajax():
+      if request.headers.get('x-requested-with') == 'XMLHttpRequest':
           self.template_name = self.ajax_template_name
       return super(AjaxTemplateMixin, self).dispatch(request, *args, **kwargs)
 

@@ -130,6 +130,8 @@ LOGIN_REDIRECT_URL = 'home:index' #'/'
 LOGOUT_REDIRECT_URL = 'home:index' #'/'
 AUTH_USER_MODEL = 'users.CustomUser'
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 
 
 REST_FRAMEWORK = {
